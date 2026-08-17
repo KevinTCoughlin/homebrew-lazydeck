@@ -22,7 +22,7 @@ class Lazydeck < Formula
       sha256 "011e6bddd0d8aab54d38516cc7f17ca5c15f5f9e2c72ca5dc96c2ac123565938"
     else
       url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.1.0/lazydeck_0.1.0_linux_amd64.tar.gz"
-      sha256 "c26e741690084fcd9ce6278cc8124e4e01b46a95a79dbe729b1585cba10144860"
+      sha256 "c26e741690084fcd9ce6278cc812e4e01b46a95a79dbe729b1585cba10144860"
     end
   end
 
