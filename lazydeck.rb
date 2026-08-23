@@ -30,6 +30,14 @@ class Lazydeck < Formula
     libexec.install "python"
     libexec.install "lazydeck" => "lazydeck-bin"
 
+    # Upstream releases starting after v0.1.0 bundle a man page and shell
+    # completions in the archive; guard on presence so this formula keeps
+    # working for both older and newer release layouts.
+    man1.install "docs/lazydeck.1" if File.exist?("docs/lazydeck.1")
+    bash_completion.install "completions/lazydeck.bash" => "lazydeck" if File.exist?("completions/lazydeck.bash")
+    zsh_completion.install "completions/_lazydeck" if File.exist?("completions/_lazydeck")
+    fish_completion.install "completions/lazydeck.fish" if File.exist?("completions/lazydeck.fish")
+
     (bin/"lazydeck").write <<~EOS
       #!/bin/sh
       set -eu
@@ -42,6 +50,16 @@ class Lazydeck < Formula
       export UV_PROJECT_ENVIRONMENT="#{var}/lazydeck/venv"
       exec "#{libexec}/lazydeck-bin" "$@"
     EOS
+  end
+
+  # Mirrors upstream's packaging/systemd/user/lazydeck-serve.service: the
+  # local HTTP API used by Godot/Unity editor integrations. Not started
+  # automatically; opt in with `brew services start lazydeck`.
+  service do
+    run [opt_bin/"lazydeck", "serve"]
+    keep_alive crashed: true
+    log_path var/"log/lazydeck.log"
+    error_log_path var/"log/lazydeck.error.log"
   end
 
   test do
