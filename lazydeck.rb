@@ -57,9 +57,9 @@ class Lazydeck < Formula
   # automatically; opt in with `brew services start lazydeck`.
   service do
     run [opt_bin/"lazydeck", "serve"]
-    keep_alive false
-    log_path var/"log/lazydeck/serve.log"
-    error_log_path var/"log/lazydeck/serve.log"
+    keep_alive crashed: true
+    log_path var/"log/lazydeck.log"
+    error_log_path var/"log/lazydeck.error.log"
   end
 
   test do
