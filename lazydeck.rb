@@ -1,28 +1,27 @@
 class Lazydeck < Formula
   desc "Terminal UI for managing a fleet of Steam devkits"
   homepage "https://github.com/KevinTCoughlin/lazydeck"
-  version "0.1.0"
   license "MIT"
 
   depends_on "uv"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.1.0/lazydeck_0.1.0_darwin_arm64.tar.gz"
-      sha256 "898bded6d545a71a940b43816dc8f52256a70013c4e3ad0ab671a5a0f76be197"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.2.2/lazydeck_0.2.2_darwin_arm64.tar.gz"
+      sha256 "8319a2af9f86b6c566d73f2ddaa3456ede8ed8bea0ba90e833d652a62d0380ae"
     else
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.1.0/lazydeck_0.1.0_darwin_amd64.tar.gz"
-      sha256 "6518c845b6ad8dc02c83ccf733fb0f76b391135619e1563316401c0d80e52872"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.2.2/lazydeck_0.2.2_darwin_amd64.tar.gz"
+      sha256 "2ef5c9d5185f80950b76f1611e0ace9f73c69de219382ecd3f0e632997b28014"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.1.0/lazydeck_0.1.0_linux_arm64.tar.gz"
-      sha256 "98d6eb59f581dc76309efe9c55665518947c046c57a59c0e347a3fd23d8a6e0b"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.2.2/lazydeck_0.2.2_linux_arm64.tar.gz"
+      sha256 "e2914dfa700fb4add36e2f31e3b75b3109e04b105d51a2a5618efa835dbc2a18"
     else
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.1.0/lazydeck_0.1.0_linux_amd64.tar.gz"
-      sha256 "77b9ff5d78d6ec0c6e42833cab20071ce5d798a8e6a1dcf75fba008dd0d4ebaf"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.2.2/lazydeck_0.2.2_linux_amd64.tar.gz"
+      sha256 "aa669479a550ca4e0727100632c445bcedd2dd2fb64c2b8ab5fb653e50135557"
     end
   end
 
@@ -42,9 +41,13 @@ class Lazydeck < Formula
       #!/bin/sh
       set -eu
       runtime="#{var}/lazydeck/python"
-      if [ ! -f "$runtime/pyproject.toml" ]; then
+      # Refresh the bridge on every version change: an upgrade must not keep
+      # running the previous release's cli.py against the new binary.
+      if [ "$(cat "$runtime/.lazydeck-version" 2>/dev/null)" != "#{version}" ]; then
+        rm -rf "$runtime"
         mkdir -p "$runtime"
         cp -R "#{libexec}/python/." "$runtime/"
+        echo "#{version}" > "$runtime/.lazydeck-version"
       fi
       export LAZYDECK_PYTHON_DIR="$runtime"
       export UV_PROJECT_ENVIRONMENT="#{var}/lazydeck/venv"
