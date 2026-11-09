@@ -7,21 +7,21 @@ class Lazydeck < Formula
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.3.0/lazydeck_0.3.0_darwin_arm64.tar.gz"
-      sha256 "d57f602ff03b70ae9960054bcd46b1263ed9588f457dc8c38ef46edc11d9eefb"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.4.0/lazydeck_0.4.0_darwin_arm64.tar.gz"
+      sha256 "42e2d2934676831aede16d36bfcf32a3356419df45069287a6ad58ccad326edc"
     else
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.3.0/lazydeck_0.3.0_darwin_amd64.tar.gz"
-      sha256 "3dc0959227d6a13e7ad98a8e42f12ed5a9c71ed1595e21c5827bf06a17fe2761"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.4.0/lazydeck_0.4.0_darwin_amd64.tar.gz"
+      sha256 "37b607a5a69ec94ee9d66694bc2deb131147354d58541ad226742c4904b4f112"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.3.0/lazydeck_0.3.0_linux_arm64.tar.gz"
-      sha256 "f6df709b18cc6c561689e9f57a1fcab4466b8212c59677025553b52fddda2d06"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.4.0/lazydeck_0.4.0_linux_arm64.tar.gz"
+      sha256 "948e505ebc9ca97b91808d31d970273bc6e25f95f92eaf1aefeb1e5cdd74d13e"
     else
-      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.3.0/lazydeck_0.3.0_linux_amd64.tar.gz"
-      sha256 "2ed7becbefefec3ef91c2f03cee0ff326a93099b79ae2476b26754cfd9220330"
+      url "https://github.com/KevinTCoughlin/lazydeck/releases/download/v0.4.0/lazydeck_0.4.0_linux_amd64.tar.gz"
+      sha256 "38764309312d98c9c112304988cc5129482fcb8c74c633ef38c528784b37fc13"
     end
   end
 
